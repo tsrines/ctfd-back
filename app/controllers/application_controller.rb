@@ -17,10 +17,15 @@ class ApplicationController < ActionController::API
     decoded_token = CoreModules::JsonWebToken.decode(token)
     user = User.find_by(id: decoded_token['user_id']) if decoded_token
     if user
-      Current.user = user
       return user
     else
       return false
     end
+  end
+
+  private
+
+  def set_current_user
+    Current.user = current_user
   end
 end

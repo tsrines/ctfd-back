@@ -10,6 +10,10 @@ Comment.all.destroy_all
 Post.all.destroy_all
 User.all.destroy_all
 
+# tim =
+#   User.create(
+#     email: 'rinesbnb@gmail.com', password: 'password', uid: 123, role: 1
+#   )
 admin =
   User.create!(
     name: 'Steve Jones',
@@ -23,18 +27,10 @@ normalUser =
     name: 'Just Aguy',
     password: 'password',
     uid: '1251235211325',
-    email: 'justaguy@email.com'
+    email: 'justaguy@email.com',
+    role: 0
   )
-firstPost =
-  Post.create!(
-    user_id: admin.id,
-    content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
-  )
-secondPost =
-  Post.create!(
-    user_id: admin.id,
-    content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
-  )
+
 thirdPost =
   Post.create(
     user_id: admin.id,
@@ -45,9 +41,23 @@ fourthPost =
     user_id: admin.id,
     content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
   )
+
 commentOne =
   Comment.create!(
     post_id: thirdPost.id,
     user_id: normalUser.id,
     content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
   )
+
+10.times do
+  Post.create!(
+    user_id: admin.id,
+    content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
+  )
+end
+35.times do
+  Post.create(
+    user_id: admin.id,
+    content: Faker::Markdown.sandwich(sentences: 10, repeat: 4)
+  )
+end

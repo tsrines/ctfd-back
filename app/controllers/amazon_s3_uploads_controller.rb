@@ -22,10 +22,6 @@ class AmazonS3UploadsController < ApplicationController
     json_response({ post_url: post_url, get_url: get_url })
   end
 
-  def attach_image_url
-    post = Post.new(user_id: Current.user.id, content: 'first post!')
-  end
-
   private
 
   def json_response(object, status = :ok)

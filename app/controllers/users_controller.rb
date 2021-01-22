@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
-  before_action { authenticate_cookie }
+  # before_action :set_user, only: %i[show update destroy]
+
   # GET /users
   def index
     @users = User.all
 
     render json: @users
+  end
+
+  def toggle
+    current_user.admin!
+    render json: 'Admin toggled', status: :ok
   end
 
   # GET /users/1

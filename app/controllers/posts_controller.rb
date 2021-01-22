@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   include Rails.application.routes.url_helpers
   before_action :set_post, only: %i[show update destroy]
-
+  before_action :admin
+  skip_before_action :admin, only: %i[index show]
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = Post.all.order('created_at DESC')
 
     render json: @posts
   end
@@ -16,34 +17,19 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
-
-    blob =
-      ActiveStorage::Blob.create_before_direct_upload!(
-        io: StringIO.new((Base64.decode64(params[:image]))),
-        filename: 'user.png',
-        content_type: 'image/png'
-      )
-
-    puts "OUTPUT ~ file: posts_controller.rb ~ line 29 ~ filename, #{filename}"
-    # file = File.open(params[:image])
-
-    @post.save!
-    @post.images.attach(blob)
-    # rails_blob_path(self.cover, disposition: 'attachment', only_path: true)
-
-    render json: { image: photo }
-    #
-    # render json: { imageUrl: photo }
-    # puts @post.image.attached?
-
-    # Now save that url in the post
-    # render json: @post, status: :ok if @post.update(images: post.images)
+    # current_user.posts.images
+    post = Post.create!(user_id: current_user.id)
+    post.update(post_params)
+    render json: post
   end
 
   # PATCH/PUT /posts/1
   def update
-    byebug
+    if @post.update(post_params)
+      render json: @post, status: :ok
+    else
+      render json: @post.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /posts/1
@@ -53,6 +39,10 @@ class PostsController < ApplicationController
 
   private
 
+  def admin
+    render json: { error: 'Unauthorized' } unless current_user.admin? == true
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
@@ -60,6 +50,15 @@ class PostsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def post_params
-    params.permit(:user_id, :title, :subtitle, :content, images: [])
+    params.permit(
+      :id,
+      :user_id,
+      :title,
+      :subtitle,
+      :content,
+      :image,
+      :image_url,
+      images: []
+    )
   end
 end

@@ -4,24 +4,41 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :validatable,
-         :omniauthable
+  devise :database_authenticatable, :validatable
 
-  def self.handle_login(email, uid)
-    user = User.find_or_create_by(uid: uid)
-    if user && user.uid == uid
-      user_info = Hash.new
-      user_info[:token] =
-        CoreModules::JsonWebToken.encode({ user_id: user.id }, 4.hours.from_now)
-      user_info[:user_id] = user.id
-      user_info[:user] = user
-      return user_info
-    else
-      return false
-    end
+  def self.handle_login(userObject)
+    user_info = Hash.new
+    user_info[:token] =
+      CoreModules::JsonWebToken.encode(
+        { user_id: userObject.id },
+        4.hours.from_now
+      )
+    user_info[:user_id] = userObject.id
+    user_info[:user] = userObject
+    user_info[:name] = userObject.name
+    return user_info
+  end
+
+  def self.handle_register(profile)
+    new_user =
+      User.create!(
+        uid: profile['id'],
+        email: profile['email'],
+        name: profile['name'],
+        avatar: profile['picture']['data']['url'],
+        password: SecureRandom.uuid
+      )
+
+    user_info = Hash.new
+    user_info[:token] =
+      CoreModules::JsonWebToken.encode(
+        { user_id: new_user.id },
+        4.hours.from_now
+      )
+    new_user.update(token: user_info[:token])
+    user_info[:user_id] = new_user.id
+    user_info[:user] = new_user
+    user_info[:name] = new_user.name
+    return user_info
   end
 end
