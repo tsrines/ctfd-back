@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
   include Rails.application.routes.url_helpers
   before_action :set_post, only: %i[show update destroy]
-  before_action :admin
-  skip_before_action :admin, only: %i[index show]
+
   # GET /posts
   def index
     @posts = Post.all.order('created_at DESC')
