@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :comments, only: %i[create]
+  resources :comments
   resources :posts
   resources :users
-  resources :sessions, only: %i[create destroy]
+  resources :sessions
 
   get '/upload', to: 'amazon_s3_uploads#set_s3_direct_post'
   get '/toggle', to: 'users#toggle'
