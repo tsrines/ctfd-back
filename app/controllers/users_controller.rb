@@ -9,9 +9,9 @@ class UsersController < ApplicationController
   end
 
   def toggle
-    current_user.admin!
-    render json: current_user
-    # render json: 'Admin toggled', status: :ok
+    user = User.find(params[:id])
+    user.admin!
+    render json: user
   end
 
   # GET /users/1
