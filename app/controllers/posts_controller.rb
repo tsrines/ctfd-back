@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     puts '`````````````````````````````````````````````````````````````````````````````````'
     puts '`````````````````````````````````````````````````````````````````````````````````'
     # current_user.posts.images
-    post = Post.create!(post_params)
+    post = Post.create!(user_id: params[:id])
     post.update(post_params)
     render json: post
   end
