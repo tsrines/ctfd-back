@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
-
+  before_action :set_current_user
   def authenticate_cookie
     token = cookies.signed[:jwt]
     decoded_token = CoreModules::JsonWebToken.decode(token)
