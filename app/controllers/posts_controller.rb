@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   include Rails.application.routes.url_helpers
+
   before_action :set_post, only: %i[show update destroy]
 
   # GET /posts
@@ -23,7 +24,7 @@ class PostsController < ApplicationController
     puts '`````````````````````````````````````````````````````````````````````````````````'
     puts '`````````````````````````````````````````````````````````````````````````````````'
     # current_user.posts.images
-    post = Post.create!
+    post = Post.create!(post_params)
     post.update(post_params)
     render json: post
   end

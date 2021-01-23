@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
-  before_action :set_current_user
   def authenticate_cookie
     token = cookies.signed[:jwt]
     decoded_token = CoreModules::JsonWebToken.decode(token)
@@ -21,11 +20,5 @@ class ApplicationController < ActionController::API
     else
       return false
     end
-  end
-
-  private
-
-  def set_current_user
-    Current.user = current_user
   end
 end
