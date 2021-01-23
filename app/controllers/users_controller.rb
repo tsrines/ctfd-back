@@ -10,7 +10,8 @@ class UsersController < ApplicationController
 
   def toggle
     current_user.admin!
-    render json: 'Admin toggled', status: :ok
+    render json: current_user
+    # render json: 'Admin toggled', status: :ok
   end
 
   # GET /users/1

@@ -24,7 +24,6 @@ module CtfdBack
     config.load_defaults 6.0
     config.autoload_paths << Rails.root.join('lib')
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
     config.api_only = true
   end
 end

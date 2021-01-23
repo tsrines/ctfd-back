@@ -5,6 +5,5 @@ class CommentSerializer < ActiveModel::Serializer
              :author_avatar,
              :author_email,
              :post,
-             #  :user,
              :posted_at
 end
