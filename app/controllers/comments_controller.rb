@@ -15,14 +15,15 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
+    user = User.find(params[:user_id])
     @comment =
       Comment.new(
         post_id: params[:post_id],
-        user_id: current_user.id,
+        user_id: user.id,
         content: params[:content],
-        author_avatar: current_user.avatar,
-        author_email: current_user.email,
-        author_name: current_user.name
+        author_avatar: user.avatar,
+        author_email: user.email,
+        author_name: user.name
       )
 
     if @comment.save
