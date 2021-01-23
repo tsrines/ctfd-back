@@ -16,8 +16,9 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
+    puts current_user
     # current_user.posts.images
-    post = Post.create!(user_id: current_user.id)
+    post = Post.create!
     post.update(post_params)
     render json: post
   end
