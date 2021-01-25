@@ -12,13 +12,13 @@ class AmazonS3UploadsController < ApplicationController
     post_url =
       signer.presigned_url(
         :put_object,
-        bucket: 'ctfd-code-challenge',
+        bucket: ENV['S3_BUCKET'],
         key: key,
         acl: 'public-read',
         content_type: file_type
       )
 
-    get_url = "https://ctfd-code-challenge.s3-us-east-2.amazonaws.com/#{key}"
+    get_url = "https://#{ENV['S3_BUCKET']}.s3-us-east-2.amazonaws.com/#{key}"
     json_response({ post_url: post_url, get_url: get_url })
   end
 
