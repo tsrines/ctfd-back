@@ -29,8 +29,9 @@ Once the configuration is set, follow these commands:
 2. cd ctfd-back
 3. bundle
 4. rails db:create
-5. rails db:seed
-6. rails s
+5. rails db:migrate
+7. rails db:seed
+8. rails s
 ```
 
 Head on over to <https://github.com/tsrines/ctfd-front> and follow further instructions from there.
