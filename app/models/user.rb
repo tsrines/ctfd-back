@@ -1,9 +1,6 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   enum role: %i[user admin]
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :validatable
 
   def self.handle_login(userObject)

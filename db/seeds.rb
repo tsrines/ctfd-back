@@ -49,12 +49,6 @@ commentOne =
     content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
   )
 
-10.times do
-  Post.create!(
-    user_id: admin.id,
-    content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
-  )
-end
 35.times do
   Post.create(
     user_id: admin.id,

@@ -22,8 +22,7 @@ class SessionsController < ApplicationController
       login_hash = User.handle_login(user)
 
       if login_hash
-        cookies.signed[:jwt] = { value: login_hash[:token], httponly: true } # render json: { user_id: login_hash[:user_id], name: login_hash[:name] }
-        user.update(token: login_hash[:token])
+        cookies.signed[:jwt] = { value: login_hash[:token], httponly: true }
         render json: {
                  user_id: login_hash[:user_id],
                  name: login_hash[:name],
@@ -45,5 +44,9 @@ class SessionsController < ApplicationController
         render json: { status: 'Log back into facebook', code: 422 }
       end
     end
+  end
+
+  def not_found
+    render json: { message: 'Sorry, that page no longer exists' }
   end
 end
