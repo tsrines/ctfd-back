@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors, debug: true do
   allow do
-    origins 'https://kind-neumann-eeb20b.netlify.app', 'https://localhost:3001'
+    origins 'netlify.app', 'localhost:3001'
     resource '*',
              headers: :any,
              methods: %i[get post put patch delete options head],
