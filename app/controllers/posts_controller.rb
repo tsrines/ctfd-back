@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
+    puts current_user
     post = Post.create!(user_id: params[:id])
     render json: post
   end
