@@ -306,7 +306,7 @@ DEPENDENCIES
   activerecord-session_store
   aws-sdk-rails (~> 3.5)
   aws-sdk-s3
-  bootsnap (~> 1.5.1)
+  bootsnap
   byebug
   devise
   dotenv-rails
@@ -322,7 +322,7 @@ DEPENDENCIES
   pry (~> 0.13.1)
   puma (~> 4.1)
   rack-cors
-  rails (~> 6.0.3, >= 6.0.3.4)
+  rails
   simple_command
   spring
   spring-watcher-listen (~> 2.0.0)

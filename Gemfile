@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
+gem 'rails'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
-gem 'bootsnap', "~> 1.5.1", require: false
+gem 'bootsnap'
 gem 'rack-cors'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'activerecord-session_store'
@@ -20,6 +20,10 @@ gem "omniauth-identity", "~> 2.0"
 gem "aws-sdk-rails", "~> 3.5"
 gem "aws-sdk-s3", require: false
 gem 'mini_magick', '>= 4.9.5'
+gem "faker", "~> 2.15"
+gem "pry", "~> 0.13.1"
+gem "active_model_serializers", "~> 0.10.12"
+
 
 
 group :development, :test do
@@ -39,8 +43,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 
-gem "faker", "~> 2.15"
-
-gem "pry", "~> 0.13.1"
-
-gem "active_model_serializers", "~> 0.10.12"
