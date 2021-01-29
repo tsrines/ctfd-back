@@ -3,16 +3,17 @@ class User < ApplicationRecord
   enum role: %i[user admin]
   devise :database_authenticatable, :validatable
 
-  def self.handle_login(userObject)
+  def self.handle_login(user_object)
     user_info = Hash.new
     user_info[:token] =
       CoreModules::JsonWebToken.encode(
-        { user_id: userObject.id },
+        { user_id: user_object.id },
         4.hours.from_now
       )
-    user_info[:user_id] = userObject.id
-    user_info[:user] = userObject
-    user_info[:name] = userObject.name
+    user_object.update(token: user_info[:token])
+    user_info[:user_id] = user_object.id
+    user_info[:user] = user_object
+    user_info[:name] = user_object.name
     return user_info
   end
 
