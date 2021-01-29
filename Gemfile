@@ -5,7 +5,6 @@ ruby '2.7.2'
 gem 'rails'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
-gem 'bootsnap'
 gem 'rack-cors'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'activerecord-session_store'
