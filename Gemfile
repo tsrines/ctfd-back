@@ -23,11 +23,6 @@ gem "faker", "~> 2.15"
 gem "pry", "~> 0.13.1"
 gem "active_model_serializers", "~> 0.10.12"
 
-group :production do
-  gem 'listen', '~> 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-end
 
 
 group :development, :test do
