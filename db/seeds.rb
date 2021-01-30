@@ -34,11 +34,13 @@ normalUser =
 thirdPost =
   Post.create(
     user_id: admin.id,
+    is_published: true,
     content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
   )
 fourthPost =
   Post.create(
     user_id: admin.id,
+    is_published: true,
     content: Faker::Markdown.sandwich(sentences: 5, repeat: 1)
   )
 

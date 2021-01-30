@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    post = Post.new(user_id: current_user.id)
+    post = Post.create!(user_id: current_user.id)
 
     render json: post
   end
@@ -58,6 +58,7 @@ class PostsController < ApplicationController
       :content,
       :image,
       :image_url,
+      :is_published,
       images: []
     )
   end # puts current_user
