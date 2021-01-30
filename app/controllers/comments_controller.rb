@@ -5,9 +5,9 @@ class CommentsController < ApplicationController
         post_id: params[:post_id],
         user_id: current_user.id,
         content: params[:content],
-        author_avatar: user.avatar,
-        author_email: user.email,
-        author_name: user.name
+        author_avatar: current_user.avatar,
+        author_email: current_user.email,
+        author_name: current_user.name
       )
 
     if @comment.save
