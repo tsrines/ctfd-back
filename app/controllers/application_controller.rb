@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::API
-  include ActionController::Cookies
-  def authenticate_cookie
-    token = cookies.signed[:jwt]
-    storage_token = request.headers['Authorization'].split(' ')[1]
+  def authenticate
+    if request.headers['Authorization']
+      storage_token = request.headers['Authorization'].split(' ')[1]
+    end
 
     decoded_token = CoreModules::JsonWebToken.decode(storage_token)
     user = User.find_by(id: decoded_token['user_id']) if decoded_token
@@ -14,9 +14,9 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    token = cookies.signed[:jwt]
-    storage_token = request.headers['Authorization'].split(' ')[1]
-
+    if request.headers['Authorization']
+      storage_token = request.headers['Authorization'].split(' ')[1]
+    end
     decoded_token = CoreModules::JsonWebToken.decode(storage_token)
     user = User.find_by(id: decoded_token['user_id']) if decoded_token
     if user

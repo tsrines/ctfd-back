@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   include Rails.application.routes.url_helpers
 
   before_action :set_post, only: %i[show update destroy]
-  before_action :authenticate_cookie, only: %i[create update destroy]
+  before_action :authenticate, only: %i[create update destroy]
 
   # GET /posts
   def index
@@ -18,8 +18,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    puts current_user
-    post = Post.create!(user_id: params[:id])
+    post = Post.create!(user_id: current_user.id)
     render json: post
   end
 
@@ -60,5 +59,5 @@ class PostsController < ApplicationController
       :image_url,
       images: []
     )
-  end
+  end # puts current_user
 end
