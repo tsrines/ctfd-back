@@ -18,7 +18,8 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    post = Post.create!(user_id: current_user.id)
+    post = Post.new(user_id: current_user.id)
+
     render json: post
   end
 
