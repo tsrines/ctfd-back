@@ -54,6 +54,7 @@ commentOne =
 35.times do
   Post.create(
     user_id: admin.id,
+    is_published: true,
     content: Faker::Markdown.sandwich(sentences: 10, repeat: 4)
   )
 end
