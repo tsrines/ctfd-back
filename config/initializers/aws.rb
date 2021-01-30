@@ -10,4 +10,4 @@ Aws.config.update(
   }
 )
 
-S3_BUCKET = Aws::S3::Resource.new.bucket(name: ENV['S3_BUCKET'])
+# S3_BUCKET = Aws::S3::Resource.new.bucket(name: ENV['S3_BUCKET'])
