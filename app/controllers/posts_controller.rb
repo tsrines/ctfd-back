@@ -1,17 +1,15 @@
 class PostsController < ApplicationController
   include Rails.application.routes.url_helpers
 
-  before_action :set_post, only: %i[show update destroy]
-  before_action :authenticate, only: %i[create update destroy]
+  before_action :set_post, only: %i[show update destroy] # before_action :authenticate, only: %i[create update destroy]
 
   # GET /posts
   def index
     @posts = Post.all.order('created_at DESC')
 
     render json: @posts
-  end
+  end # GET /posts/1
 
-  # GET /posts/1
   def show
     render json: @post
   end

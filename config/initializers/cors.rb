@@ -9,7 +9,11 @@ Rails.application.config.action_controller.forgery_protection_origin_check =
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins %w[kind-neumann-eeb20b.netlify.app localhost:3001]
+    origins %w[
+              kind-neumann-eeb20b.netlify.app
+              localhost:3001
+              https://stoic-lamarr-cfa3d0.netlify.app
+            ]
     resource '*',
              headers: :any,
              methods: %i[get post put patch delete options head],

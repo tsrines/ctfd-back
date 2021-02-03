@@ -5,6 +5,10 @@ class UsersController < ApplicationController # GET /users # before_action :set_
     render json: user
   end
 
+  def data
+    byebug
+  end
+
   # GET /users/1
   def show
     render json: current_user
