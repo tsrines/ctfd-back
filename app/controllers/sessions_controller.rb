@@ -31,6 +31,6 @@ class SessionsController < ApplicationController
   end
 
   def not_found
-    render json: { message: 'Sorry, that page no longer exists' }
+    render json: { message: 'That route cannot be found' }
   end
 end
